@@ -1,5 +1,8 @@
 import 'App.dart';
+import 'Database.dart';
 
-main() {
+main() async {
+  await Database().instalacion();
+
   App().inicioAPP();
 }
