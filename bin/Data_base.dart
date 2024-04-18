@@ -49,7 +49,7 @@ class Database {
     await conn.query('''CREATE TABLE IF NOT EXISTS usuarios (
           idpaciene INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           nombre VARCHAR (50) NOT NULL  UNIQUE,
-          contrasena VARCHAR (10)NOT NULL,
+          password VARCHAR (10)NOT NULL,
           correo VARCHAR (50) NOT NULL,
           edad INT,
           genero VARCHAR (10),
