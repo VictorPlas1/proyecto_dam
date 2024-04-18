@@ -54,7 +54,7 @@ class Database {
           edad INT,
           genero VARCHAR (10),
           servicios VARCHAR (50),
-          proximaCita DATE
+          proximaCita VARCHAR(20)
 
           )''');
 
@@ -79,7 +79,7 @@ class Database {
       idusuario INT NOT NULL,
       nombre VARCHAR(50),
       servicio VARCHAR (50),
-      fecha DATE 
+      fecha VARCHAR(20)
       )''');
     print("Tabla citas creada");
   }

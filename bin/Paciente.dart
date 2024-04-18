@@ -7,4 +7,7 @@ class Paciente {
   String? genero;
   String? servicios;
   String? proximaCita;
+  int? habilidaLogo;
+  int? habilidadPsic;
+  int? habilidadMotriz;
 }
