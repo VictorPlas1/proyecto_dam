@@ -4,10 +4,11 @@ version: 1.0.0
 # repository: https://github.com/my_org/my_repo
 
 environment:
-  sdk: ^3.1.4
+  sdk: ^3.1.2
 
 # Add regular dependencies here.
 dependencies:
+  mysql1: ^0.20.0
   # path: ^1.8.0
 
 dev_dependencies:
