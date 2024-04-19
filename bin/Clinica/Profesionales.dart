@@ -24,14 +24,26 @@ class Profesional extends Motherclass {
   get getPassword => this.password;
   set setPassword(password) => this.password = password;
   @override
-  String? primaryKey;
+  String? primaryKey = "idProfesional";
+  @override
+  String? tableName = "profesionales";
+  @override
+  Map? campos() => {
+        "nombre": nombre,
+        "profesion": profesion,
+        "usuario": usuario,
+        "password": password
+      };
 
   @override
-  String? tableName;
-
-  @override
-  campos() {}
-
-  @override
-  fromMap(ResultRow row) {}
+  fromMap(ResultRow row) => Profesional().fromMap(row);
+  Profesional();
+  Profesional.fromMap(ResultRow map) {
+    idProfesional = map['idProfesional'];
+    idProfesion = map['idProfesion'];
+    nombre = map['nombre'];
+    profesion = map['profesion'];
+    usuario = map['usuario'];
+    password = map['password'];
+  }
 }
