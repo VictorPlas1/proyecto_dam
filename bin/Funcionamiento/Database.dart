@@ -55,7 +55,6 @@ class Database {
           edad INT,
           genero VARCHAR (10),
           servicios VARCHAR (50),
-          proximaCita VARCHAR(20),
           habilidadadlogo INT,
           habilidadpsic INT,
           habilidadmotriz INT

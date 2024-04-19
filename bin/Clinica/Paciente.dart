@@ -28,7 +28,6 @@ class Paciente extends Motherclass {
         "edad": edad,
         "genero": genero,
         "servicios": servicios,
-        "proximaCita": proximaCita,
         "habilidadLogo": habilidaLogo,
         "habilidadPsic": habilidadPsic,
         "habilidadMotriz": habilidadMotriz
@@ -44,7 +43,6 @@ class Paciente extends Motherclass {
     edad = map['edad'];
     genero = map['genero'];
     servicios = map['servicios'];
-    proximaCita = map['proximaCita'];
     habilidaLogo = map['habilidadLogo'];
     habilidadPsic = map['habilidadPsic'];
     habilidadMotriz = map['habilidadMotiz'];
