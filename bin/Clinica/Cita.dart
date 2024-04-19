@@ -1,4 +1,6 @@
-import 'Mother_class.dart';
+import 'package:mysql1/src/results/row.dart';
+
+import '../Funcionamiento/Mother_class.dart';
 
 class Cita extends Motherclass {
   int? idCita;
@@ -15,4 +17,7 @@ class Cita extends Motherclass {
 
   @override
   campos() {}
+
+  @override
+  fromMap(ResultRow row) {}
 }
