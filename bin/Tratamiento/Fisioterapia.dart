@@ -6,5 +6,8 @@ class Fisioterapia extends Tratamiento {
   @override
   String nombreTratamiento = 'fisio';
   @override
-  int precio = 50;
+  int precioSesion = 50;
+
+  @override
+  int valorSesion = 20;
 }

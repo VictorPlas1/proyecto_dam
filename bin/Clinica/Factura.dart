@@ -18,5 +18,8 @@ class Factura extends Tratamiento {
   @override
   String nombreTratamiento = [''] as String;
   @override
-  int precio = 0;
+  int precioSesion = 0;
+
+  @override
+  int valorSesion = 0;
 }

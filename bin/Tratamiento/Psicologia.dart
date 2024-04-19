@@ -6,5 +6,7 @@ class Psicologia extends Tratamiento {
   @override
   String nombreTratamiento = 'psicologo';
   @override
-  int precio = 60;
+  int precioSesion = 60;
+  @override
+  int valorSesion = 25;
 }

@@ -8,5 +8,8 @@ class Logopedia extends Tratamiento {
   String nombreTratamiento = 'logopeda';
 
   @override
-  int precio = 45;
+  int precioSesion = 45;
+
+  @override
+  int valorSesion = 25;
 }

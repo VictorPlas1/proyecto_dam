@@ -1,8 +1,12 @@
-class Paciente {
+import 'package:mysql1/src/results/row.dart';
+
+import '../Funcionamiento/Mother_class.dart';
+
+class Paciente extends Motherclass {
   int? idPaciente;
   String? nombre;
-  String? contrasena;
-  String? correo;
+  String? password;
+  String? usuario;
   int? edad;
   String? genero;
   String? servicios;
@@ -11,27 +15,38 @@ class Paciente {
   int? habilidadPsic;
   int? habilidadMotriz;
   //Getter y Setter
-  int? get getIdPaciente => this.idPaciente;
-  set setIdPaciente(int? idPaciente) => this.idPaciente = idPaciente;
-  get getNombre => this.nombre;
-  set setNombre(nombre) => this.nombre = nombre;
-  get getContrasena => this.contrasena;
-  set setContrasena(contrasena) => this.contrasena = contrasena;
-  get getCorreo => this.correo;
-  set setCorreo(correo) => this.correo = correo;
-  get getEdad => this.edad;
-  set setEdad(edad) => this.edad = edad;
-  get getGenero => this.genero;
-  set setGenero(genero) => this.genero = genero;
-  get getServicios => this.servicios;
-  set setServicios(servicios) => this.servicios = servicios;
-  get getProximaCita => this.proximaCita;
-  set setProximaCita(proximaCita) => this.proximaCita = proximaCita;
-  get getHabilidaLogo => this.habilidaLogo;
-  set setHabilidaLogo(habilidaLogo) => this.habilidaLogo = habilidaLogo;
-  get getHabilidadPsic => this.habilidadPsic;
-  set setHabilidadPsic(habilidadPsic) => this.habilidadPsic = habilidadPsic;
-  get getHabilidadMotriz => this.habilidadMotriz;
-  set setHabilidadMotriz(habilidadMotriz) =>
-      this.habilidadMotriz = habilidadMotriz;
+
+  @override
+  String? primaryKey = "idPaciente";
+  @override
+  String? tableName = "pacientes";
+  @override
+  Map? campos() => {
+        "nombre": nombre,
+        "password": password,
+        "usuario": usuario,
+        "edad": edad,
+        "genero": genero,
+        "servicios": servicios,
+        "proximaCita": proximaCita,
+        "habilidadLogo": habilidaLogo,
+        "habilidadPsic": habilidadPsic,
+        "habilidadMotriz": habilidadMotriz
+      };
+  @override
+  fromMap(ResultRow row) => Paciente().fromMap(row);
+  Paciente();
+  Paciente.fromMap(ResultRow map) {
+    idPaciente = map['idpaciente'];
+    nombre = map['nombre'];
+    password = map['password'];
+    usuario = map['usuario'];
+    edad = map['edad'];
+    genero = map['genero'];
+    servicios = map['servicios'];
+    proximaCita = map['proximaCita'];
+    habilidaLogo = map['habilidadLogo'];
+    habilidadPsic = map['habilidadPsic'];
+    habilidadMotriz = map['habilidadMotiz'];
+  }
 }
