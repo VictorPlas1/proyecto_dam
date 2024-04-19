@@ -47,14 +47,17 @@ class Database {
 
   _crearTablaPaciente(conn) async {
     await conn.query('''CREATE TABLE IF NOT EXISTS pacientes (
-          idpaciene INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+          idpaciente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           nombre VARCHAR (50) NOT NULL  UNIQUE,
           password VARCHAR (10)NOT NULL,
           correo VARCHAR (50) NOT NULL,
           edad INT,
           genero VARCHAR (10),
           servicios VARCHAR (50),
-          proximaCita VARCHAR(20)
+          proximaCita VARCHAR(20),
+          habilidadadlogo INT,
+          habilidadpsic INT,
+          habilidadmotriz INT
 
           )''');
 

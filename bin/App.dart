@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'Database.dart';
 
 class App {
   inicioAPP() {
+    Database().conexion();
     stdout.writeln('''Bienvenido a Clinica Sanitaria Victor
     ¿Qué opción desea elegir?
     1- Registrar Sanitario
