@@ -2,11 +2,12 @@ import 'dart:io';
 import 'dart:math';
 
 import '../Clinica/Paciente.dart';
+import '../Funcionamiento/Database.dart';
 
 class Examen {
-  obtenerPuntuacion() {
-    stdout.writeln('''Bienvenido ${Paciente().nombre}
-Le vamos a pasar unas preguntas para averiguar sus habilidades
+  obtenerPuntuacionLogo() async {
+    await Database().conexion();
+    stdout.writeln('''
 Pregunta de Logopedia.
 1- ¿La palabra "aber" está bien escrita?    1 SI 2 NO''');
     var respuesta1 = stdin.readLineSync() ?? "e";
@@ -23,6 +24,9 @@ Pregunta de Logopedia.
           Paciente().habilidaLogo = Random().nextInt(90);
         }
     }
+  }
+
+  obtenerPuntuacioPsico() {
     stdout.writeln('''Pregunta de Psicologia
        2- ¿Tienes problemas con la bebida?       1 SI  2 NO''');
     var respuesta2 = stdin.readLineSync() ?? "e";
@@ -34,6 +38,9 @@ Pregunta de Logopedia.
       case 2:
         Paciente().habilidadPsic = Random().nextInt(80);
     }
+  }
+
+  obtenerPuntuacionMotriz() {
     stdout.writeln('''Pregunta de Fisioterapia
         3- ¿ Te duele la espalda?                 1 SI 2 NO''');
     var respuesta3 = stdin.readLineSync() ?? "e";

@@ -29,7 +29,6 @@ class Database {
       await _crearProyectoDAM(conn);
       await _crearTablaPaciente(conn);
       await _crearTablaProfesional(conn);
-      await _crearTablaCita(conn);
       await _crearTablaFactura(conn);
 
       await conn.close();
@@ -51,10 +50,10 @@ class Database {
           idpaciente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           nombre VARCHAR (50) NOT NULL  UNIQUE,
           password VARCHAR (10)NOT NULL,
-          correo VARCHAR (50) NOT NULL,
+          
           edad INT,
           genero VARCHAR (10),
-          servicios VARCHAR (50),
+          
           habilidadadlogo INT,
           habilidadpsic INT,
           habilidadmotriz INT
@@ -65,7 +64,6 @@ class Database {
   _crearTablaProfesional(conn) async {
     await conn.query(''' CREATE TABLE IF NOT EXISTS profesionales(
           idprofesional INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-          idprofesion INT NOT NULL,
           nombre VARCHAR(50) NOT NULL,
           profesion VARCHAR(50) NOT NULL,
           usuario VARCHAR(50) NOT NULL,
@@ -73,26 +71,15 @@ class Database {
           )''');
     print("Tabla profesional creada");
   }
+}
 
-  _crearTablaCita(conn) async {
-    await conn.query('''CREATE TABLE IF NOT EXISTS citas(
-      idcita INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      idusuario INT NOT NULL,
-      nombre VARCHAR(50),
-      servicio VARCHAR (50),
-      fecha VARCHAR(20)
-      )''');
-    print("Tabla citas creada");
-  }
-
-  _crearTablaFactura(conn) async {
-    await conn.query('''CREATE TABLE IF NOT EXISTS facturas(
+_crearTablaFactura(conn) async {
+  await conn.query('''CREATE TABLE IF NOT EXISTS facturas(
     idfactura INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     idpaciente INT,
     precio INT,
-    total INT,
-    nombretratamiento VARCHAR(20)
+    total INT
+    
      )''');
-    print("Tabla facturas creada");
-  }
+  print("Tabla facturas creada");
 }

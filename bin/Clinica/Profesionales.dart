@@ -1,6 +1,8 @@
 import 'package:mysql1/src/results/row.dart';
-
+import 'dart:io';
 import '../Funcionamiento/Mother_class.dart';
+import '../Funcionamiento/Database.dart';
+import '../Funcionamiento/App.dart';
 
 class Profesional extends Motherclass {
   int? idProfesional;
@@ -27,6 +29,7 @@ class Profesional extends Motherclass {
   String? primaryKey = "idProfesional";
   @override
   String? tableName = "profesionales";
+
   @override
   Map? campos() => {
         "nombre": nombre,
@@ -46,4 +49,70 @@ class Profesional extends Motherclass {
     usuario = map['usuario'];
     password = map['password'];
   }
+
+  insertarProfesional() async {
+    stdout.writeln("Introduce tu nombre:");
+    nombre = stdin.readLineSync() ?? "e";
+    stdout.writeln("Introuce un nombre de usuario");
+    usuario = stdin.readLineSync() ?? "e";
+    stdout.writeln("Elige una contraseña");
+    password = stdin.readLineSync() ?? "e";
+    stdout.writeln("Indica tu profesion");
+    profesion = stdin.readLineSync() ?? "e";
+    // stdout.writeln("Profesional insertado correctamente");
+    insertar();
+  }
+
+  loginProfesional() async {
+    var conn = await Database().conexion();
+    try {
+      var resultado = await conn
+          .query('SELECT * FROM profesionales WHERE nombre = ?', [this.nombre]);
+      Profesional profesional = Profesional.fromMap(resultado.first);
+      if (this.password == profesional.password) {
+        return profesional;
+      } else
+        return false;
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      await conn.close();
+    }
+  }
+
+  login() async {
+    Profesional profesional = new Profesional();
+    stdout.writeln('Introduce tu nombre de usuario');
+    profesional.nombre = stdin.readLineSync();
+    stdout.writeln('Introduce tu constraseña');
+    profesional.password = stdin.readLineSync();
+    var resultado = await Profesional().loginProfesional();
+    if (resultado == false) {
+      stdout.writeln('Tu nombre de usuario o contraseña son incorrectos');
+      App().inicioAPP();
+    } else {
+      menuInicioProfesional();
+    }
+  }
+
+  menuInicioProfesional() {
+    stdout.writeln('''Bienvenido ${nombre} 
+    ¿Que opcion desea elegir
+    1 - Ver Pacientes
+    2 - Ver sueldo acumulado}''');
+    var opcion = stdin.readLineSync() ?? "e";
+    var respuesta = int.tryParse(opcion);
+    switch (respuesta) {
+      case 1:
+        verPacientes();
+        break;
+      case 2:
+        verSueldo();
+        break;
+    }
+  }
+
+  verPacientes() {}
+  verSueldo() {}
 }
