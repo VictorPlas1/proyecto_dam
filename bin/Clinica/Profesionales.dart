@@ -3,6 +3,7 @@ import 'dart:io';
 import '../Funcionamiento/Mother_class.dart';
 import '../Funcionamiento/Database.dart';
 import '../Funcionamiento/App.dart';
+import 'Paciente.dart';
 
 class Profesional extends Motherclass {
   int? idProfesional;
@@ -105,14 +106,13 @@ class Profesional extends Motherclass {
     var respuesta = int.tryParse(opcion);
     switch (respuesta) {
       case 1:
-        verPacientes();
+        Paciente().verPacientes();
         break;
       case 2:
         verSueldo();
         break;
     }
   }
-
-  verPacientes() {}
-  verSueldo() {}
 }
+
+verSueldo() {}

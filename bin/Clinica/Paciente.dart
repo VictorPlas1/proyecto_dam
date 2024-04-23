@@ -114,4 +114,19 @@ class Paciente extends Motherclass {
   verFactura() {
     stdout.writeln("El importe total de tu Factura es:");
   }
+
+  verPacientes() async {
+    var conn = await Database().conexion();
+
+    try {
+      var resultado = await conn.query('SELECT * FROM pacientes');
+      List<Paciente> pacientes =
+          resultado.map((row) => Paciente.fromMap(row)).toList();
+      return pacientes;
+    } catch (e) {
+      print(e);
+    } finally {
+      await conn.close();
+    }
+  }
 }
