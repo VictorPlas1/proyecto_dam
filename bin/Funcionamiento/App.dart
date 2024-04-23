@@ -36,12 +36,11 @@ class App {
 
         break;
       case 5:
-        stdout.writeln(''' 
-      La clinica Sanitaria Victor Plasencia está ubicada en la calle .....''');
+        Profesional().ubicacion;
         inicioAPP();
         break;
       case 6:
-        stdout.writeln(''' Para enviar su curriculum ...''');
+        Profesional().curriculum;
         inicioAPP();
         break;
     }

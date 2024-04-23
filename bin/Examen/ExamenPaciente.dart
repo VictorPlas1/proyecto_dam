@@ -58,7 +58,36 @@ Pregunta de Logopedia.
     Fisioterapia${Paciente().habilidadMotriz} ''');
   }
 
-  sesionesNecesarias() {
-    while (true) {}
+  sesionesNecesariasLogo(Paciente paciente) {
+    int sesionesRecibidasLogo = 0;
+    while (Paciente().habilidaLogo > 100) {
+      print("${Paciente().nombre} necesita sesiones de Logopedia");
+      Paciente().habilidaLogo += 10;
+      sesionesRecibidasLogo++;
+      sleep(Duration(seconds: 2));
+      return sesionesRecibidasLogo;
+    }
+  }
+
+  sesionesNecesariasPsic(Paciente paciente) {
+    int sesionesRecibidasPsic = 0;
+    while (Paciente().habilidadPsic > 100) {
+      print("${Paciente().nombre} necesita sesiones de Psicologo");
+      Paciente().habilidadPsic += 10;
+      sesionesRecibidasPsic++;
+      sleep(Duration(seconds: 2));
+      return sesionesRecibidasPsic;
+    }
+  }
+
+  sesionesNecesariasMotriz(Paciente paciente) {
+    int sesionesRecibidasMotriz = 0;
+    while (Paciente().habilidadMotriz > 100) {
+      print("${Paciente().nombre} necesita sesiones de Fisioterapia");
+      Paciente().habilidadMotriz += 10;
+      sesionesRecibidasMotriz++;
+      sleep(Duration(seconds: 2));
+      return sesionesRecibidasMotriz;
+    }
   }
 }

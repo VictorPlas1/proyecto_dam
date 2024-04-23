@@ -11,9 +11,9 @@ class Paciente extends Motherclass {
   String? nombre;
   String? password;
   String? usuario;
-  int? habilidaLogo;
-  int? habilidadPsic;
-  int? habilidadMotriz;
+  var habilidaLogo;
+  var habilidadPsic;
+  var habilidadMotriz;
   //Getter y Setter
 
   @override
@@ -103,7 +103,6 @@ class Paciente extends Motherclass {
     var respuesta = int.tryParse(opcion);
     switch (respuesta) {
       case 1:
-        Examen().sesionesNecesarias();
         break;
       case 2:
         verFactura();
