@@ -7,17 +7,45 @@ import '../Funcionamiento/App.dart';
 import '../Funcionamiento/Mother_class.dart';
 
 class Paciente extends Motherclass {
-  int? idPaciente;
+  int? idpaciente;
   String? nombre;
   String? password;
   String? usuario;
-  var habilidaLogo;
-  var habilidadPsic;
-  var habilidadMotriz;
-  //Getter y Setter
+  var habilidadlogo;
+  var habilidadpsic;
+  var habilidadmotriz;
+  // GETTER Y SETTER
+  get getIdPaciente => this.idpaciente;
+
+  set setIdPaciente(idPaciente) => this.idpaciente = idPaciente;
+
+  get getNombre => this.nombre;
+
+  set setNombre(nombre) => this.nombre = nombre;
+
+  get getPassword => this.password;
+
+  set setPassword(password) => this.password = password;
+
+  get getUsuario => this.usuario;
+
+  set setUsuario(usuario) => this.usuario = usuario;
+
+  get getHabilidalogo => this.habilidadlogo;
+
+  set setHabilidalogo(habilidalogo) => this.habilidadlogo = habilidalogo;
+
+  get getHabilidadpsic => this.habilidadpsic;
+
+  set setHabilidadpsic(habilidadpsic) => this.habilidadpsic = habilidadpsic;
+
+  get getHabilidadmotriz => this.habilidadmotriz;
+
+  set setHabilidadmotriz(habilidadmotriz) =>
+      this.habilidadmotriz = habilidadmotriz;
 
   @override
-  String? primaryKey = "idPaciente";
+  String? primaryKey = "idpaciente";
   @override
   String? tableName = "pacientes";
 
@@ -26,25 +54,24 @@ class Paciente extends Motherclass {
         "nombre": nombre,
         "password": password,
         "usuario": usuario,
-        "habilidadLogo": habilidaLogo,
-        "habilidadPsic": habilidadPsic,
-        "habilidadMotriz": habilidadMotriz
+        "habilidadlogo": habilidadlogo,
+        "habilidadpsic": habilidadpsic,
+        "habilidadmotriz": habilidadmotriz
       };
   @override
   fromMap(ResultRow row) => Paciente().fromMap(row);
   Paciente();
   Paciente.fromMap(ResultRow map) {
-    idPaciente = map['idpaciente'];
+    idpaciente = map['idpaciente'];
     nombre = map['nombre'];
     password = map['password'];
     usuario = map['usuario'];
-
-    habilidaLogo = map['habilidadLogo'];
-    habilidadPsic = map['habilidadPsic'];
-    habilidadMotriz = map['habilidadMotiz'];
+    habilidadlogo = map['habilidadlogo'];
+    habilidadpsic = map['habilidadpsic'];
+    habilidadmotriz = map['habilidadmotriz'];
   }
 
-  insertarPaciente() {
+  insertarPaciente() async {
     stdout.writeln("Introduce tu nombre:");
     nombre = stdin.readLineSync() ?? "e";
     stdout.writeln("Introuce un nombre de usuario");
@@ -52,12 +79,12 @@ class Paciente extends Motherclass {
     stdout.writeln("Elige una contraseña");
     password = stdin.readLineSync() ?? "e";
     stdout.writeln(
-        "Para poder dar valor a tus habilidades,le vamos a pasar un cuestinario");
-    habilidaLogo = Examen().obtenerPuntuacionLogo();
-    habilidadPsic = Examen().obtenerPuntuacioPsico();
-    habilidadMotriz = Examen().obtenerPuntuacionMotriz();
-    stdout.writeln("Paciente insertado correctamente");
-    insertar();
+        "Para poder dar valorar tus habilidades,le vamos a pasar un cuestinario");
+    habilidadlogo = Examen().obtenerPuntuacionLogo();
+    habilidadpsic = Examen().obtenerPuntuacioPsico();
+    habilidadmotriz = Examen().obtenerPuntuacionMotriz();
+
+    await insertar();
   }
 
   loginPaciente() async {
@@ -79,33 +106,36 @@ class Paciente extends Motherclass {
   }
 
   login() async {
-    Paciente paciente = new Paciente();
     stdout.writeln('Introduce tu nombre de usuario');
-    paciente.nombre = stdin.readLineSync();
+    nombre = stdin.readLineSync();
     stdout.writeln('Introduce tu constraseña');
-    paciente.password = stdin.readLineSync();
-    var resultado = await Paciente().loginPaciente();
+    password = stdin.readLineSync();
+    var resultado = await loginPaciente();
     if (resultado == false) {
       stdout.writeln('Tu nombre de usuario o contraseña son incorrectos');
       App().inicioAPP();
     } else {
-      menuInicioPaciente();
+      menuInicioPaciente(resultado);
     }
   }
 
-  menuInicioPaciente() {
-    stdout.writeln('''Bienvenido ${nombre} 
+  menuInicioPaciente(Paciente paciente) {
+    stdout.writeln('''Bienvenido $nombre
     ¿Que opcion desea elegir
     1 - Ver tus sesiones necesarias
     2 - Ver factura a pagar
-    }''');
+    ''');
     var opcion = stdin.readLineSync() ?? "e";
     var respuesta = int.tryParse(opcion);
     switch (respuesta) {
       case 1:
-        break;
+        Examen().sesionesNecesariasLogo(paciente);
+        Examen().sesionesNecesariasPsic(paciente);
+        Examen().sesionesNecesariasMotriz(paciente);
+
       case 2:
         verFactura();
+        App().inicioAPP();
         break;
     }
   }
@@ -116,7 +146,6 @@ class Paciente extends Motherclass {
 
   verPacientes() async {
     var conn = await Database().conexion();
-
     try {
       var resultado = await conn.query('SELECT * FROM pacientes');
       List<Paciente> pacientes =

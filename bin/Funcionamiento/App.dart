@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 import '../Clinica/Paciente.dart';
-
 import 'Database.dart';
 import '../Clinica/Profesionales.dart';
 
@@ -33,7 +32,7 @@ class App {
         break;
       case 4:
         await Paciente().login();
-        Paciente().menuInicioPaciente();
+        Paciente().menuInicioPaciente(Paciente());
 
         break;
       case 5:

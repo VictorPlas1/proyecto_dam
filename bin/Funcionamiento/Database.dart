@@ -50,11 +50,8 @@ class Database {
           idpaciente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           nombre VARCHAR (50) NOT NULL  UNIQUE,
           password VARCHAR (10)NOT NULL,
-          
-          edad INT,
-          genero VARCHAR (10),
-          
-          habilidadadlogo INT,
+          usuario VARCHAR (29),
+          habilidadlogo INT,
           habilidadpsic INT,
           habilidadmotriz INT
           )''');

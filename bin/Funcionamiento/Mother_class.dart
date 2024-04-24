@@ -13,7 +13,7 @@ abstract class Motherclass {
     var conn = await Database().conexion();
     String listaCampos = campos().keys.join(",");
     List valores = campos().values.toList();
-    String interrogantes = campos().map((e) => "?").join(",");
+    String interrogantes = valores.map((e) => "?").join(",");
     try {
       await conn.query(
           'INSERT INTO $tableName ($listaCampos) VALUES($interrogantes) ',
