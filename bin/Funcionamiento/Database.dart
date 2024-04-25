@@ -74,7 +74,10 @@ _crearTablaFactura(conn) async {
   await conn.query('''CREATE TABLE IF NOT EXISTS facturas(
     idfactura INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     idpaciente INT,
-    precio INT,
+    precioSesion INT,
+    sesionesNecesariasLOGO INT,
+    sesionesNecesariasPSIC INT,
+    sesionesNecesariasMOTRIZ INT,
     total INT
     
      )''');

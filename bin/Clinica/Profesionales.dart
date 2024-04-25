@@ -76,26 +76,34 @@ class Profesional extends Motherclass {
       stdout.writeln('Tu nombre de usuario o contraseña son incorrectos');
       App().inicioAPP();
     } else {
-      menuInicioProfesional();
+      await menuInicioProfesional(Profesional());
     }
   }
 
-  menuInicioProfesional() async {
-    stdout.writeln('''Bienvenido ${nombre} 
+  menuInicioProfesional(Profesional profesional) async {
+    stdout.writeln('''Bienvenido $nombre
     ¿Que opcion desea elegir
     1 - Ver Pacientes
-    2 - Ver sueldo acumulado''');
+    2 - Ver sueldo acumulado
+    3 - Salir ''');
     var opcion = stdin.readLineSync() ?? "e";
     var respuesta = int.tryParse(opcion);
     switch (respuesta) {
       case 1:
-        await Paciente().verPacientes();
+        await listarPacientes();
+        await menuInicioProfesional(profesional);
 
-        App().inicioAPP();
         break;
       case 2:
-        verSueldo();
+        stdout.writeln('''Calculando sueldo...''');
+        sleep(Duration(seconds: 1));
+        stdout.writeln("...");
+        sleep(Duration(seconds: 1));
+        await verSueldo();
+        await menuInicioProfesional(profesional);
         break;
+      case 3:
+        await App().inicioAPP();
     }
   }
 
@@ -108,5 +116,31 @@ class Profesional extends Motherclass {
     stdout
         .writeln(''' Hoy es dia $dia , con un sueldo diario de $sueldoDia euros
     Has acumulado $sueldoAcumulado  euros''');
+  }
+
+  @override
+  all() async {
+    var conn = await Database().conexion();
+    try {
+      var resultado = await conn.query('SELECT * FROM pacientes');
+      List<Paciente> pacientes =
+          resultado.map((row) => Paciente.fromMap(row)).toList();
+
+      return pacientes;
+    } catch (e) {
+      print(e);
+    } finally {
+      await conn.close();
+    }
+  }
+
+  listarPacientes() async {
+    List<Paciente> listadoPacientes = await all();
+    for (Paciente elemento in listadoPacientes) {
+      stdout.writeln('''Nombre:${elemento.nombre} 
+      Habilidad Logopedia: ${elemento.habilidadlogo}
+      Habilidad Psicologica:${elemento.habilidadpsic}
+      Habilidad Motriz:${elemento.habilidadmotriz}''');
+    }
   }
 }

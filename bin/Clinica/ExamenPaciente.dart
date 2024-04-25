@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
-import '../Clinica/Paciente.dart';
+import 'Paciente.dart';
 
 class Examen {
   int obtenerPuntuacionLogo() {
@@ -61,6 +61,7 @@ Pregunta de Logopedia.
     }
     sleep(Duration(seconds: 2));
     print(sesionesRecibidasLogo);
+    return sesionesRecibidasLogo;
   }
 
   sesionesNecesariasPsic(Paciente paciente) {

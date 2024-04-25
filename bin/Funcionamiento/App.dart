@@ -27,12 +27,12 @@ class App {
         inicioAPP();
         break;
       case 3:
-        await Profesional().login();
-        Profesional().menuInicioProfesional();
+        Profesional profesional = await Profesional().login();
+        Profesional().menuInicioProfesional(profesional);
         break;
       case 4:
-        await Paciente().login();
-        Paciente().menuInicioPaciente(Paciente());
+        Paciente paciente = await Paciente().login();
+        Paciente().menuInicioPaciente(paciente);
 
         break;
       case 5:

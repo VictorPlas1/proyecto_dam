@@ -1,6 +1,6 @@
 import 'package:mysql1/src/results/row.dart';
 import 'dart:io';
-import '../Examen/ExamenPaciente.dart';
+import 'ExamenPaciente.dart';
 import '../Funcionamiento/Database.dart';
 import '../Funcionamiento/App.dart';
 
@@ -14,6 +14,7 @@ class Paciente extends Motherclass {
   var habilidadlogo;
   var habilidadpsic;
   var habilidadmotriz;
+  var sesionRecibidasLogo;
   // GETTER Y SETTER
   get getIdPaciente => this.idpaciente;
 
@@ -119,11 +120,12 @@ class Paciente extends Motherclass {
     }
   }
 
-  menuInicioPaciente(Paciente paciente) {
+  menuInicioPaciente(Paciente paciente) async {
     stdout.writeln('''Bienvenido $nombre
-    ¿Que opcion desea elegir
+    ¿Que opcion desea elegir?
     1 - Ver tus sesiones necesarias
     2 - Ver factura a pagar
+    3 -Salir
     ''');
     var opcion = stdin.readLineSync() ?? "e";
     var respuesta = int.tryParse(opcion);
@@ -132,29 +134,24 @@ class Paciente extends Motherclass {
         Examen().sesionesNecesariasLogo(paciente);
         Examen().sesionesNecesariasPsic(paciente);
         Examen().sesionesNecesariasMotriz(paciente);
-
+        await menuInicioPaciente(paciente);
       case 2:
-        verFactura();
-        App().inicioAPP();
+        stdout.writeln('''Calculando factura...''');
+        sleep(Duration(seconds: 1));
+        stdout.writeln("...");
+        sleep(Duration(seconds: 1));
+        await verFactura();
+        await menuInicioPaciente(paciente);
+
         break;
+      case 3:
+        stdout.writeln("Adios");
+        sleep(Duration(seconds: 1));
+        await App().inicioAPP();
     }
   }
 
   verFactura() {
     stdout.writeln("El importe total de tu Factura es:");
-  }
-
-  verPacientes() async {
-    var conn = await Database().conexion();
-    try {
-      var resultado = await conn.query('SELECT * FROM pacientes');
-      List<Paciente> pacientes =
-          resultado.map((row) => Paciente.fromMap(row)).toList();
-      return pacientes;
-    } catch (e) {
-      print(e);
-    } finally {
-      await conn.close();
-    }
   }
 }
