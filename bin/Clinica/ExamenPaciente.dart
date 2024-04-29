@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'Paciente.dart';
 
 class Examen {
@@ -53,7 +52,7 @@ Pregunta de Logopedia.
   }
 
   sesionesNecesariasLogo(Paciente paciente) {
-    int sesionesRecibidasLogo = 0;
+    var sesionesRecibidasLogo = 0;
     print("${paciente.nombre} necesita sesiones de Logopedia");
     while (paciente.habilidadlogo < 100) {
       paciente.habilidadlogo += 10;
@@ -61,22 +60,25 @@ Pregunta de Logopedia.
     }
     sleep(Duration(seconds: 2));
     print(sesionesRecibidasLogo);
+
     return sesionesRecibidasLogo;
   }
 
   sesionesNecesariasPsic(Paciente paciente) {
-    int sesionesRecibidasPsic = 0;
+    var sesionesRecibidasPsic = 0;
     print("${paciente.nombre} necesita sesiones de Psicologo");
     while (paciente.habilidadpsic < 100) {
       paciente.habilidadpsic += 10;
       sesionesRecibidasPsic++;
     }
     sleep(Duration(seconds: 2));
+
     print(sesionesRecibidasPsic);
+    return sesionesRecibidasPsic;
   }
 
   sesionesNecesariasMotriz(Paciente paciente) {
-    int sesionesRecibidasMotriz = 0;
+    var sesionesRecibidasMotriz = 0;
     print("${paciente.nombre} necesita sesiones de Fisioterapia");
     while (paciente.habilidadmotriz < 100) {
       paciente.habilidadmotriz += 10;
@@ -84,5 +86,7 @@ Pregunta de Logopedia.
     }
     sleep(Duration(seconds: 2));
     print(sesionesRecibidasMotriz);
+
+    return sesionesRecibidasMotriz;
   }
 }

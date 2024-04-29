@@ -14,7 +14,7 @@ class Paciente extends Motherclass {
   var habilidadlogo;
   var habilidadpsic;
   var habilidadmotriz;
-  var sesionRecibidasLogo;
+
   // GETTER Y SETTER
   get getIdPaciente => this.idpaciente;
 
@@ -57,7 +57,7 @@ class Paciente extends Motherclass {
         "usuario": usuario,
         "habilidadlogo": habilidadlogo,
         "habilidadpsic": habilidadpsic,
-        "habilidadmotriz": habilidadmotriz
+        "habilidadmotriz": habilidadmotriz,
       };
   @override
   fromMap(ResultRow row) => Paciente().fromMap(row);

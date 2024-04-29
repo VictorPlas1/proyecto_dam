@@ -29,7 +29,6 @@ class Database {
       await _crearProyectoDAM(conn);
       await _crearTablaPaciente(conn);
       await _crearTablaProfesional(conn);
-      await _crearTablaFactura(conn);
 
       await conn.close();
     } catch (e) {
@@ -54,6 +53,7 @@ class Database {
           habilidadlogo INT,
           habilidadpsic INT,
           habilidadmotriz INT
+           
           )''');
     print('tabla pacientes creada');
   }
@@ -68,18 +68,4 @@ class Database {
           )''');
     print("Tabla profesional creada");
   }
-}
-
-_crearTablaFactura(conn) async {
-  await conn.query('''CREATE TABLE IF NOT EXISTS facturas(
-    idfactura INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    idpaciente INT,
-    precioSesion INT,
-    sesionesNecesariasLOGO INT,
-    sesionesNecesariasPSIC INT,
-    sesionesNecesariasMOTRIZ INT,
-    total INT
-    
-     )''');
-  print("Tabla facturas creada");
 }
