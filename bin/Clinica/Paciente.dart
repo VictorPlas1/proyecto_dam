@@ -125,7 +125,8 @@ class Paciente extends Motherclass {
     ¿Que opcion desea elegir?
     1 - Ver tus sesiones necesarias
     2 - Ver factura a pagar
-    3 -Salir
+    3 - Recibir tratamientos
+    4 -Salir
     ''');
     var opcion = stdin.readLineSync() ?? "e";
     var respuesta = int.tryParse(opcion);
@@ -140,18 +141,16 @@ class Paciente extends Motherclass {
         sleep(Duration(seconds: 1));
         stdout.writeln("...");
         sleep(Duration(seconds: 1));
-        await verFactura();
+        await Examen().verFactura();
         await menuInicioPaciente(paciente);
+      case 3:
+        Examen().recibirTratamiento(paciente);
 
         break;
-      case 3:
+      case 4:
         stdout.writeln("Adios");
         sleep(Duration(seconds: 1));
         await App().inicioAPP();
     }
-  }
-
-  verFactura() {
-    stdout.writeln("El importe total de tu Factura es:");
   }
 }
