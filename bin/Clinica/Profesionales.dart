@@ -81,14 +81,17 @@ class Profesional extends Motherclass {
   }
 
   menuInicioProfesional(Profesional profesional) async {
-    stdout.writeln('''Bienvenido $nombre
+    int? opcion;
+    do {
+      stdout.writeln('''Bienvenido $nombre
     ¿Que opcion desea elegir
     1 - Ver Pacientes
     2 - Ver sueldo acumulado
     3 - Salir ''');
-    var opcion = stdin.readLineSync() ?? "e";
-    var respuesta = int.tryParse(opcion);
-    switch (respuesta) {
+      String respuesta = stdin.readLineSync() ?? "e";
+      opcion = parsearOpcion(respuesta);
+    } while (tresOpciones(opcion));
+    switch (opcion) {
       case 1:
         await listarPacientes();
         await menuInicioProfesional(profesional);
@@ -143,4 +146,9 @@ class Profesional extends Motherclass {
       Habilidad Motriz:${elemento.habilidadmotriz}''');
     }
   }
+
+  //FUNCIONES HERRAMIENTA
+  bool tresOpciones(var opcion) =>
+      opcion == null && opcion != 1 && opcion != 2 && opcion != 3;
+  int? parsearOpcion(String respuesta) => int.tryParse(respuesta);
 }

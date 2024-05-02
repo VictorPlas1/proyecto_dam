@@ -86,6 +86,7 @@ class Paciente extends Motherclass {
     habilidadmotriz = Examen().obtenerPuntuacionMotriz();
 
     await insertar();
+    App().inicioAPP();
   }
 
   loginPaciente() async {
@@ -121,16 +122,19 @@ class Paciente extends Motherclass {
   }
 
   menuInicioPaciente(Paciente paciente) async {
-    stdout.writeln('''Bienvenido $nombre
+    int? opcion;
+    do {
+      stdout.writeln('''Bienvenido $nombre
     ¿Que opcion desea elegir?
     1 - Ver tus sesiones necesarias
     2 - Ver factura a pagar
     3 - Recibir tratamientos
     4 -Salir
     ''');
-    var opcion = stdin.readLineSync() ?? "e";
-    var respuesta = int.tryParse(opcion);
-    switch (respuesta) {
+      String respuesta = stdin.readLineSync() ?? "e";
+      opcion = parsearOpcion(respuesta);
+    } while (cuatroOpciones(opcion));
+    switch (opcion) {
       case 1:
         Examen().sesionesNecesariasLogo(paciente);
         Examen().sesionesNecesariasPsic(paciente);
@@ -141,11 +145,11 @@ class Paciente extends Motherclass {
         sleep(Duration(seconds: 1));
         stdout.writeln("...");
         sleep(Duration(seconds: 1));
-        await Examen().verFactura();
+        Examen().verFactura(paciente);
         await menuInicioPaciente(paciente);
       case 3:
         Examen().recibirTratamiento(paciente);
-
+        await menuInicioPaciente(paciente);
         break;
       case 4:
         stdout.writeln("Adios");
@@ -153,4 +157,14 @@ class Paciente extends Motherclass {
         await App().inicioAPP();
     }
   }
+
+  //FUNCIONES HERRAMIENTA
+  bool cuatroOpciones(var opcion) =>
+      opcion == null &&
+      opcion != 1 &&
+      opcion != 2 &&
+      opcion != 3 &&
+      opcion != 4;
+
+  int? parsearOpcion(String respuesta) => int.tryParse(respuesta);
 }

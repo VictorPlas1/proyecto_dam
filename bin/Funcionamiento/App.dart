@@ -6,8 +6,10 @@ import '../Clinica/Profesionales.dart';
 
 class App {
   inicioAPP() async {
+    int? opcion;
     await Database().conexion();
-    stdout.writeln('''Bienvenido a Clinica Sanitaria Victor
+    do {
+      stdout.writeln('''Bienvenido a Clinica Sanitaria Victor
     ¿Qué opción desea elegir?
     1- Registrar Sanitario
     2 - Registar Paciente
@@ -15,9 +17,10 @@ class App {
     4 - Log in Paciente
     5 - Informacion de contacto
     6 - Trabaja con nosotros''');
-    var opcion = stdin.readLineSync() ?? "e";
-    var respuesta = int.tryParse(opcion);
-    switch (respuesta) {
+      String respuesta = stdin.readLineSync() ?? "e";
+      opcion = parsearOpcion(respuesta);
+    } while (seisOpciones(opcion));
+    switch (opcion) {
       case 1:
         await Profesional().insertarProfesional();
         inicioAPP();
@@ -47,13 +50,16 @@ class App {
   }
 
   ubicacion() {
-    stdout.writeln(''' Indica la ciudad donde te interesa la información
+    int? opcion;
+    do {
+      stdout.writeln(''' Indica la ciudad donde te interesa la información
     1 - Madrid
     2 - Talavera de la Reina
     3 - Toledo''');
-    var opcion = stdin.readLineSync() ?? "e";
-    var respuesta = int.tryParse(opcion);
-    switch (respuesta) {
+      String respuesta = stdin.readLineSync() ?? "e";
+      opcion = parsearOpcion(respuesta);
+    } while (tresOpciones(opcion));
+    switch (opcion) {
       case 1:
         stdout.writeln('''La clinica de Madrid está ubicada en: 
        Calle Antonio Leyva , 35
@@ -72,13 +78,16 @@ class App {
   }
 
   curriculum() {
-    stdout.writeln('''Indica tu profesion 
+    int? opcion;
+    do {
+      stdout.writeln('''Indica tu profesion 
   1 - Logopeda
   2 - Psicologo
   3 - Fisioterapeuta ''');
-    var opcion = stdin.readLineSync() ?? "e";
-    var respuesta = int.tryParse(opcion);
-    switch (respuesta) {
+      String respuesta = stdin.readLineSync() ?? "e";
+      opcion = parsearOpcion(respuesta);
+    } while (tresOpciones(opcion));
+    switch (opcion) {
       case 1:
         fraseAzar();
         break;
@@ -99,4 +108,17 @@ class App {
     ];
     stdout.writeln(frases[random.nextInt(frases.length)]);
   }
+
+  //FUNCIONES HERRAMIENTAS
+  bool tresOpciones(var opcion) =>
+      opcion == null && opcion != 1 && opcion != 2 && opcion != 3;
+  seisOpciones(var opcion) =>
+      opcion == null &&
+      opcion != 1 &&
+      opcion != 2 &&
+      opcion != 3 &&
+      opcion != 4 &&
+      opcion != 5 &&
+      opcion != 6;
+  int? parsearOpcion(String respuesta) => int.tryParse(respuesta);
 }
