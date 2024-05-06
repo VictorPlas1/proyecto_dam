@@ -86,7 +86,6 @@ class Paciente extends Motherclass {
     habilidadmotriz = Examen().obtenerPuntuacionMotriz();
 
     await insertar();
-    App().inicioAPP();
   }
 
   loginPaciente() async {
@@ -139,22 +138,21 @@ class Paciente extends Motherclass {
         Examen().sesionesNecesariasLogo(paciente);
         Examen().sesionesNecesariasPsic(paciente);
         Examen().sesionesNecesariasMotriz(paciente);
-        await menuInicioPaciente(paciente);
+        await App().inicioAPP();
       case 2:
         stdout.writeln('''Calculando factura...''');
         sleep(Duration(seconds: 1));
         stdout.writeln("...");
         sleep(Duration(seconds: 1));
         Examen().verFactura(paciente);
-        await menuInicioPaciente(paciente);
+        await App().inicioAPP();
       case 3:
         Examen().recibirTratamiento(paciente);
-        await menuInicioPaciente(paciente);
+        await App().inicioAPP();
         break;
       case 4:
-        stdout.writeln("Adios");
-        sleep(Duration(seconds: 1));
-        await App().inicioAPP();
+        print('Adios');
+        App().inicioAPP();
     }
   }
 

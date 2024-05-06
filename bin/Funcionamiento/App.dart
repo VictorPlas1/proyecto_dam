@@ -1,13 +1,12 @@
 import 'dart:io';
 import 'dart:math';
 import '../Clinica/Paciente.dart';
-import 'Database.dart';
+
 import '../Clinica/Profesionales.dart';
 
 class App {
   inicioAPP() async {
     int? opcion;
-    await Database().conexion();
     do {
       stdout.writeln('''Bienvenido a Clinica Sanitaria Victor
     ¿Qué opción desea elegir?

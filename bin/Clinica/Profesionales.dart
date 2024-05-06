@@ -106,7 +106,7 @@ class Profesional extends Motherclass {
         await menuInicioProfesional(profesional);
         break;
       case 3:
-        await App().inicioAPP();
+        App().inicioAPP();
     }
   }
 

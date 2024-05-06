@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import '../Funcionamiento/App.dart';
 import 'Paciente.dart';
 
 class Examen {
@@ -119,14 +120,13 @@ Pregunta de Logopedia.
 
     stdout.writeln('''Total factura Logopedia
       $sesionL sesiones recibidas X 25 € 
-     
-       ${sesionL * 25} €
-       Total factura Psicologia
+                     ${sesionL * 25} €
+               Total factura Psicologia
        $sesionP sesiones recibidas X 38€
-       ${sesionP * 38} €
-       Total factura Fisioterapia
+                     ${sesionP * 38} €
+               Total factura Fisioterapia
        $sesionF sesiones recibidad X 32€ 
-       ${sesionF * 32} €
+                      ${sesionF * 32} €
        El total a pagar es ${sesionL * 25 + sesionP * 28 + sesionF * 32} €''');
   }
 
@@ -143,24 +143,24 @@ Pregunta de Logopedia.
     } while (tresOpciones(opcion));
     switch (opcion) {
       case 1:
-        sesionLogopedia(paciente);
+        //sesionLogopedia(paciente);
         juegoLogo(paciente);
-        Paciente().menuInicioPaciente(paciente);
+        await App().inicioAPP();
 
         break;
       case 2:
-        sesionPsicologia(paciente);
+        // sesionPsicologia(paciente);
         juegoPsicologia(paciente);
-        Paciente().menuInicioPaciente(paciente);
+        await App().inicioAPP();
         break;
       case 3:
-        sesionFisio(paciente);
+        // sesionFisio(paciente);
         juegoFisio(paciente);
-        Paciente().menuInicioPaciente(paciente);
+        await App().inicioAPP();
     }
   }
 
-  sesionLogopedia(Paciente paciente) {
+  /* sesionLogopedia(Paciente paciente) {
     stdout.writeln(''' Bienvenido ${paciente.nombre} a sesiones de Logopedia.
         Su habilidad actual es ${paciente.habilidadlogo},
         necesitas ${sesionesNecesariasLogo(paciente)} sesiones  para alcanzar la mayor habilidad.
@@ -180,7 +180,7 @@ Pregunta de Logopedia.
         necesitas ${sesionesNecesariasMotriz(paciente)} sesiones  para alcanzar la mayor habilidad.
         ''');
   }
-
+*/
   juegoLogo(Paciente paciente) {
     List<String> palabras = [
       'mesa',
