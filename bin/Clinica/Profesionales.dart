@@ -76,7 +76,7 @@ class Profesional extends Motherclass {
       stdout.writeln('Tu nombre de usuario o contraseña son incorrectos');
       App().inicioAPP();
     } else {
-      await menuInicioProfesional(Profesional());
+      await menuInicioProfesional(resultado);
     }
   }
 
@@ -95,7 +95,6 @@ class Profesional extends Motherclass {
       case 1:
         await listarPacientes();
         await menuInicioProfesional(profesional);
-
         break;
       case 2:
         stdout.writeln('''Calculando sueldo...''');
@@ -106,12 +105,12 @@ class Profesional extends Motherclass {
         await menuInicioProfesional(profesional);
         break;
       case 3:
-        App().inicioAPP();
+        await App().inicioAPP();
     }
   }
 
   verSueldo() {
-    int sueldoDia = 83;
+    int sueldoDia = 78;
     DateTime now = DateTime.now();
     int dia = now.day;
 
@@ -119,6 +118,16 @@ class Profesional extends Motherclass {
     stdout
         .writeln(''' Hoy es dia $dia , con un sueldo diario de $sueldoDia euros
     Has acumulado $sueldoAcumulado  euros''');
+  }
+
+  listarPacientes() async {
+    List<Paciente> listadoPacientes = await all();
+    for (Paciente elemento in listadoPacientes) {
+      stdout.writeln('''Nombre:${elemento.nombre} 
+      Habilidad Logopedia: ${elemento.habilidadlogo}
+      Habilidad Psicologica:${elemento.habilidadpsic}
+      Habilidad Motriz:${elemento.habilidadmotriz}''');
+    }
   }
 
   @override
@@ -134,16 +143,6 @@ class Profesional extends Motherclass {
       print(e);
     } finally {
       await conn.close();
-    }
-  }
-
-  listarPacientes() async {
-    List<Paciente> listadoPacientes = await all();
-    for (Paciente elemento in listadoPacientes) {
-      stdout.writeln('''Nombre:${elemento.nombre} 
-      Habilidad Logopedia: ${elemento.habilidadlogo}
-      Habilidad Psicologica:${elemento.habilidadpsic}
-      Habilidad Motriz:${elemento.habilidadmotriz}''');
     }
   }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'dart:io';
 import 'dart:math';
 
@@ -65,43 +67,41 @@ Pregunta de Logopedia.
   sesionesNecesariasLogo(Paciente paciente) {
     var sesionesRecibidasLogo = 0;
     print("${paciente.nombre} necesita sesiones de Logopedia");
-    while (paciente.habilidadlogo < 100) {
-      paciente.habilidadlogo += 10;
+    var habilitylogo = paciente.habilidadlogo;
+    while (habilitylogo < 100) {
+      habilitylogo += 10;
       sesionesRecibidasLogo++;
     }
     sleep(Duration(seconds: 2));
     print(sesionesRecibidasLogo);
-
-    return sesionesRecibidasLogo;
   }
 
   sesionesNecesariasPsic(Paciente paciente) {
     var sesionesRecibidasPsic = 0;
-    stdout.writeln("${paciente.nombre} necesita sesiones de Psicologo");
-    while (paciente.habilidadpsic < 100) {
-      paciente.habilidadpsic += 10;
+    stdout.writeln("${paciente.nombre} necesita sesiones de Psicologia");
+    var habilityPsic = paciente.habilidadpsic;
+    while (habilityPsic < 100) {
+      habilityPsic += 10;
       sesionesRecibidasPsic++;
     }
     sleep(Duration(seconds: 2));
 
     print(sesionesRecibidasPsic);
-    return sesionesRecibidasPsic;
   }
 
   sesionesNecesariasMotriz(Paciente paciente) {
     var sesionesRecibidasMotriz = 0;
     print("${paciente.nombre} necesita sesiones de Fisioterapia");
-    while (paciente.habilidadmotriz < 100) {
-      paciente.habilidadmotriz += 10;
+    var habilityMotriz = paciente.habilidadmotriz;
+    while (habilityMotriz < 100) {
+      habilityMotriz += 10;
       sesionesRecibidasMotriz++;
     }
     sleep(Duration(seconds: 2));
     print(sesionesRecibidasMotriz);
-
-    return sesionesRecibidasMotriz;
   }
 
-  verFactura(Paciente paciente) {
+  verFactura(Paciente paciente) async {
     int sesionL = 0;
     int sesionP = 0;
     int sesionF = 0;
@@ -130,7 +130,7 @@ Pregunta de Logopedia.
        El total a pagar es ${sesionL * 25 + sesionP * 28 + sesionF * 32} €''');
   }
 
-  recibirTratamiento(Paciente paciente) async {
+  recibirTratamiento(Paciente paciente) {
     int? opcion;
     do {
       stdout.writeln('''
@@ -143,44 +143,20 @@ Pregunta de Logopedia.
     } while (tresOpciones(opcion));
     switch (opcion) {
       case 1:
-        //sesionLogopedia(paciente);
         juegoLogo(paciente);
-        await App().inicioAPP();
+        App().inicioAPP();
 
         break;
       case 2:
-        // sesionPsicologia(paciente);
         juegoPsicologia(paciente);
-        await App().inicioAPP();
+        App().inicioAPP();
         break;
       case 3:
-        // sesionFisio(paciente);
         juegoFisio(paciente);
-        await App().inicioAPP();
+        App().inicioAPP();
     }
   }
 
-  /* sesionLogopedia(Paciente paciente) {
-    stdout.writeln(''' Bienvenido ${paciente.nombre} a sesiones de Logopedia.
-        Su habilidad actual es ${paciente.habilidadlogo},
-        necesitas ${sesionesNecesariasLogo(paciente)} sesiones  para alcanzar la mayor habilidad.
-        ''');
-  }
-
-  sesionPsicologia(Paciente paciente) {
-    stdout.writeln(''' Bienvenido ${paciente.nombre} a sesiones de Psicologia.
-        Su habilidad actual es ${paciente.habilidadpsic},
-        necesitas ${sesionesNecesariasPsic(paciente)} sesiones  para alcanzar la mayor habilidad.
-        ''');
-  }
-
-  sesionFisio(Paciente paciente) {
-    stdout.writeln(''' Bienvenido ${paciente.nombre} a sesiones de Fisioterapia.
-        Su habilidad actual es ${paciente.habilidadmotriz},
-        necesitas ${sesionesNecesariasMotriz(paciente)} sesiones  para alcanzar la mayor habilidad.
-        ''');
-  }
-*/
   juegoLogo(Paciente paciente) {
     List<String> palabras = [
       'mesa',
@@ -191,11 +167,14 @@ Pregunta de Logopedia.
       'libro'
     ];
     Random random = Random();
+
     String palabraSecreta = palabras[random.nextInt(palabras.length)];
     String palabraAhorcado = '_' * palabraSecreta.length;
     int intentos = palabraSecreta.length + 3;
-    stdout.writeln(''' La palabra a adivinar puede ser una de las siguientes:
-    $palabras''');
+    dibujo1();
+    stdout.writeln('''
+        La palabra a adivinar puede ser una de las siguientes:
+      $palabras''');
 
     stdout.writeln(
         'La palabra a adivinar tiene ${palabraSecreta.length} letras.');
@@ -217,7 +196,7 @@ Pregunta de Logopedia.
       } else {
         intentos--;
         print(
-            '''Lo siento, la letra $respuesta no está en la palabra.   Intentos: $intentos''');
+            '''Lo siento, la letra $respuesta no está en la palabra.   Intentos: $intentos ''');
       }
 
       if (palabraAhorcado.contains(respuesta)) {
@@ -231,6 +210,7 @@ Pregunta de Logopedia.
       if (intentos == 0) {
         print(
             'Lo siento, te has quedado sin intentos, la palabra era $palabraSecreta');
+        dibujo2();
       }
     } while (intentos > 0);
   }
@@ -248,6 +228,7 @@ Pregunta de Logopedia.
     String palabraSecreta = palabras[random.nextInt(palabras.length)];
     String palabraAhorcado = '_' * palabraSecreta.length;
     int intentos = palabraSecreta.length + 3;
+    dibujo1();
     stdout.writeln(''' La palabra a adivinar puede ser una de las siguientes:
     $palabras''');
 
@@ -285,6 +266,7 @@ Pregunta de Logopedia.
       if (intentos == 0) {
         print(
             'Lo siento, te has quedado sin intentos, la palabra era $palabraSecreta');
+        dibujo2();
       }
     } while (intentos > 0);
   }
@@ -302,6 +284,7 @@ Pregunta de Logopedia.
     String palabraSecreta = palabras[random.nextInt(palabras.length)];
     String palabraAhorcado = '_' * palabraSecreta.length;
     int intentos = palabraSecreta.length + 3;
+    dibujo1();
     stdout.writeln(''' La palabra a adivinar puede ser una de las siguientes:
     $palabras''');
 
@@ -339,13 +322,43 @@ Pregunta de Logopedia.
       if (intentos == 0) {
         print(
             'Lo siento, te has quedado sin intentos, la palabra era $palabraSecreta');
+        dibujo2();
       }
     } while (intentos > 0);
   }
 
-  //FUNCIONES HERRAMIENTA
-  bool tresOpciones(var opcion) =>
-      opcion == null && opcion != 1 && opcion != 2 && opcion != 3;
-  bool dosOpciones(var opcion) => opcion == null && opcion != 1 && opcion != 2;
-  int? parsearOpcion(String respuesta) => int.tryParse(respuesta);
+  dibujo1() {
+    stdout.writeln('''    
+
+                       _____
+                       |    |
+                            |
+                            |
+                            |
+                        --------    
+    
+    ''');
+  }
+
+  dibujo2() {
+    stdout.writeln('''    
+
+                       _____
+                       |    |
+                       O    |
+                      <|>   |
+                       |    |
+                       |    |
+                      <|>   |
+                            |
+                         -------  
+    
+    ''');
+  }
 }
+
+//FUNCIONES HERRAMIENTA
+bool tresOpciones(var opcion) =>
+    opcion == null && opcion != 1 && opcion != 2 && opcion != 3;
+bool dosOpciones(var opcion) => opcion == null && opcion != 1 && opcion != 2;
+int? parsearOpcion(String respuesta) => int.tryParse(respuesta);

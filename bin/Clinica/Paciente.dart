@@ -1,5 +1,6 @@
 import 'package:mysql1/src/results/row.dart';
 import 'dart:io';
+
 import 'ExamenPaciente.dart';
 import '../Funcionamiento/Database.dart';
 import '../Funcionamiento/App.dart';
@@ -14,36 +15,6 @@ class Paciente extends Motherclass {
   var habilidadlogo;
   var habilidadpsic;
   var habilidadmotriz;
-
-  // GETTER Y SETTER
-  get getIdPaciente => this.idpaciente;
-
-  set setIdPaciente(idPaciente) => this.idpaciente = idPaciente;
-
-  get getNombre => this.nombre;
-
-  set setNombre(nombre) => this.nombre = nombre;
-
-  get getPassword => this.password;
-
-  set setPassword(password) => this.password = password;
-
-  get getUsuario => this.usuario;
-
-  set setUsuario(usuario) => this.usuario = usuario;
-
-  get getHabilidalogo => this.habilidadlogo;
-
-  set setHabilidalogo(habilidalogo) => this.habilidadlogo = habilidalogo;
-
-  get getHabilidadpsic => this.habilidadpsic;
-
-  set setHabilidadpsic(habilidadpsic) => this.habilidadpsic = habilidadpsic;
-
-  get getHabilidadmotriz => this.habilidadmotriz;
-
-  set setHabilidadmotriz(habilidadmotriz) =>
-      this.habilidadmotriz = habilidadmotriz;
 
   @override
   String? primaryKey = "idpaciente";
@@ -116,7 +87,7 @@ class Paciente extends Motherclass {
       stdout.writeln('Tu nombre de usuario o contraseña son incorrectos');
       App().inicioAPP();
     } else {
-      menuInicioPaciente(resultado);
+      await menuInicioPaciente(resultado);
     }
   }
 
@@ -135,24 +106,24 @@ class Paciente extends Motherclass {
     } while (cuatroOpciones(opcion));
     switch (opcion) {
       case 1:
-        Examen().sesionesNecesariasLogo(paciente);
-        Examen().sesionesNecesariasPsic(paciente);
-        Examen().sesionesNecesariasMotriz(paciente);
-        await App().inicioAPP();
+        await Examen().sesionesNecesariasLogo(paciente);
+        await Examen().sesionesNecesariasPsic(paciente);
+        await Examen().sesionesNecesariasMotriz(paciente);
+        await menuInicioPaciente(paciente);
       case 2:
         stdout.writeln('''Calculando factura...''');
         sleep(Duration(seconds: 1));
         stdout.writeln("...");
         sleep(Duration(seconds: 1));
-        Examen().verFactura(paciente);
-        await App().inicioAPP();
+        await Examen().verFactura(paciente);
+        await menuInicioPaciente(paciente);
       case 3:
         Examen().recibirTratamiento(paciente);
-        await App().inicioAPP();
+        await menuInicioPaciente(paciente);
         break;
       case 4:
         print('Adios');
-        App().inicioAPP();
+        await App().inicioAPP();
     }
   }
 
