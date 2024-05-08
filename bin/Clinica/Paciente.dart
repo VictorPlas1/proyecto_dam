@@ -57,6 +57,7 @@ class Paciente extends Motherclass {
     habilidadmotriz = Examen().obtenerPuntuacionMotriz();
 
     await insertar();
+    await App().inicioAPP();
   }
 
   loginPaciente() async {

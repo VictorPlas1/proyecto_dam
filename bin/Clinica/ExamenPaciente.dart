@@ -186,6 +186,7 @@ Pregunta de Logopedia.
 
       if (respuesta == palabraSecreta) {
         print("Enhorabuena, has acertado");
+        break;
       } else if (palabraSecreta.contains(respuesta)) {
         for (int i = 0; i < palabraSecreta.length; i++) {
           if (palabraSecreta[i] == respuesta) {
@@ -204,7 +205,12 @@ Pregunta de Logopedia.
       }
       if (palabraAhorcado == palabraSecreta) {
         print('''Enhorabuena, has acertado la palabra. Tu habilidad ha mejorado.
-              Habilidad actual ${paciente.habilidadlogo + 50}''');
+
+
+              Habilidad actual ${paciente.habilidadlogo + 50}
+
+
+                   Nos vemos pronto!!''');
         break;
       }
       if (intentos == 0) {
@@ -220,7 +226,7 @@ Pregunta de Logopedia.
       'bipolar',
       'anorexia',
       'depresion',
-      'dislalia',
+      'ansiedad',
       'droga',
       'ludopata'
     ];
@@ -260,7 +266,13 @@ Pregunta de Logopedia.
       }
       if (palabraAhorcado == palabraSecreta) {
         print('''Enhorabuena, has acertado la palabra. Tu habilidad ha mejorado.
-              Habilidad actual ${paciente.habilidadpsic + 50}''');
+
+
+              Habilidad actual ${paciente.habilidadpsic + 50}
+              
+              
+                 Nos vemos pronto!!!''');
+
         break;
       }
       if (intentos == 0) {
@@ -277,8 +289,8 @@ Pregunta de Logopedia.
       'tibia',
       'perone',
       'tibia',
-      'rodilla',
-      'tobillo'
+      'cubito',
+      'clavicula'
     ];
     Random random = Random();
     String palabraSecreta = palabras[random.nextInt(palabras.length)];
@@ -316,7 +328,11 @@ Pregunta de Logopedia.
       }
       if (palabraAhorcado == palabraSecreta) {
         print('''Enhorabuena, has acertado la palabra. Tu habilidad ha mejorado.
-              Habilidad actual ${paciente.habilidadmotriz + 50}''');
+
+
+              Habilidad actual ${paciente.habilidadmotriz + 50}
+              
+                 Nos vemos pronto!!!''');
         break;
       }
       if (intentos == 0) {
