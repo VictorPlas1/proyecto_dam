@@ -105,16 +105,20 @@ Pregunta de Logopedia.
     int sesionL = 0;
     int sesionP = 0;
     int sesionF = 0;
-    while (paciente.habilidadlogo < 100) {
-      paciente.habilidadlogo += 10;
+    var habilityLogo = paciente.habilidadlogo;
+    var habilityMotriz = paciente.habilidadmotriz;
+    var habilityPsic = paciente.habilidadpsic;
+
+    while (habilityLogo < 100) {
+      habilityLogo += 10;
       sesionL++;
     }
-    while (paciente.habilidadpsic < 100) {
-      paciente.habilidadpsic += 10;
+    while (habilityPsic < 100) {
+      habilityPsic += 10;
       sesionP++;
     }
-    while (paciente.habilidadmotriz < 100) {
-      paciente.habilidadmotriz += 10;
+    while (habilityMotriz < 100) {
+      habilityMotriz += 10;
       sesionF++;
     }
 
@@ -128,6 +132,9 @@ Pregunta de Logopedia.
        $sesionF sesiones recibidad X 32€ 
                       ${sesionF * 32} €
        El total a pagar es ${sesionL * 25 + sesionP * 28 + sesionF * 32} €''');
+    sesionL = 0;
+    sesionF = 0;
+    sesionP = 0;
   }
 
   recibirTratamiento(Paciente paciente) {
